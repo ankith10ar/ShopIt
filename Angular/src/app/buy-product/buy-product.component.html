@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-8">
+      <br>
+      <br>
+      <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of listCart">
+          <td>{{item.name}}</td>
+          <td>{{item.desp}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.cost}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto">
+      <a routerLink="/payment" type="button" class="btn btn-success" >Pay Now</a>
+    </div>
+  </div>
+
+</div>

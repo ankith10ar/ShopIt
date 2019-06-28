@@ -1,0 +1,56 @@
+<div class="container" xmlns:th="http://www.w3.org/1999/xhtml">
+  <div class="row justify-content-md-center">
+    <div class="col-md-8">
+      <form name="form" #f="ngForm" novalidate (ngSubmit)="sendAlert()">
+        <br>
+        <br>
+        <a *ngIf="listCart.length>0" routerLink="/buy" type="button" class="btn btn-success ">
+          Buy Now
+        </a>
+        <br>
+        <br>
+        <table class="table table-hover">
+          <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Cost Of Each</th>
+            <th>Cost</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let cart of listCart; let index=index;">
+          <tr>
+            <td name="name" [(ngModel)]="cart.name">{{cart.name}}</td>
+            <td name="desp" [(ngModel)]="cart.desp">{{cart.desp}}</td>
+            <td >
+              <label>
+                <input name="name+{{index}}" (change)="change_event()" [(ngModel)]="listCart[index].quantity" max="5"
+                       min="1" name="quantity" type="number" value="{{listCart[index].quantity}}">
+              </label>
+              <!--<input type="hidden" th:field="*{cartList[__${stat.index}__].cost}" />-->
+             <!-- <input type="hidden" th:field="*{cartList[__${stat.index}__].costofeach}" />
+              <input type="hidden" th:field="*{cartList[__${stat.index}__].desp}" />
+              <input type="hidden" th:field="*{cartList[__${stat.index}__].cartid}" />
+              <input type="hidden" th:field="*{cartList[__${stat.index}__].name}" />-->
+            </td>
+            <td name="costofeach" [(ngModel)]="cart.costofeach">{{cart.costofeach}}</td>
+            <td name="cost" [(ngModel)]="cart.cost">{{cart.cost}}</td>
+            <td><button (click)="deleteItem(cart.cartid)">Remove</button></td>
+          </tr>
+          </ng-container>
+          </tbody>
+        </table>
+        <br>
+        <br>
+        <div align="center">
+          <button *ngIf="changed" id="save" type="submit" class="btn btn-success ">
+            Save Cart
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

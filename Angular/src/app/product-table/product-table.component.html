@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-8">
+      <br>
+      <h1>Welcome, please choose your products.</h1>
+      <br>
+      <a routerLink="/cart"  type="button" class="btn btn-primary">
+        Cart(<span>{{size}}</span>)
+      </a>
+      &nbsp;
+      <a *ngIf="size>0" routerLink="/buy" type="button" class="btn btn-success">
+        Buy Now
+      </a>
+      <br>
+      <br>
+      <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Value</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of listProd">
+          <td>{{product.productname}}</td>
+          <td>{{product.productdescription}}</td>
+          <td>{{product.productvalue}}</td>
+          <td><button (click)="buyProduct(product.productid)" type="button" class="btn btn-success">Buy</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

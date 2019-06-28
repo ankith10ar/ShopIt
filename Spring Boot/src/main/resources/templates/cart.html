@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<script>
+    window.onload=function(){
+        document.getElementById("save").style.display='none';
+    };
+    function showButton(){
+        document.getElementById("save").style.display='block';
+    }
+</script>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">E-Commerce</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" productid="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/home}">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/cart}">Cart<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+            <form action="#" th:action="@{/cart}" th:object="${listCart}" method="post">
+            <br>
+            <br>
+            <a th:href="@{/buy}" th:if="${listCart.getCartList().size()>0}" type="button" class="btn btn-success ">
+                Buy Now
+            </a>
+            <br>
+            <br>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Cost Of Each</th>
+                    <th>Cost</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cart,stat : *{cartList}">
+                    <td th:text="${cart.name}"></td>
+                    <td th:text="${cart.description}"></td>
+                    <td >
+                        <input (keyup)="rightPartnerCheck" onchange="showButton()" type="number"  th:field="*{cartList[__${stat.index}__].quantity}" min="1" max="5" th:value="${cart.quantity}">
+                        <!--<input type="hidden" th:field="*{cartList[__${stat.index}__].cost}" />-->
+                        <input type="hidden" th:field="*{cartList[__${stat.index}__].costofeach}" />
+                        <input type="hidden" th:field="*{cartList[__${stat.index}__].description}" />
+                        <input type="hidden" th:field="*{cartList[__${stat.index}__].productid}" />
+                        <input type="hidden" th:field="*{cartList[__${stat.index}__].name}" />
+                    </td>
+                    <td th:text="${cart.costofeach}"></td>
+                    <td th:text="${cart.quantity * cart.costofeach}"></td>
+                    <td><a th:href="@{'/cartDel/' + ${cart.productid}}">Remove</a></td>
+                </tr>
+                </tbody>
+            </table>
+                <br>
+                <br>
+                <div align="center">
+                <button style="display: none" productid="save" type="submit" class="btn btn-success ">
+                    Save Cart
+                </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

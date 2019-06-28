@@ -1,0 +1,25 @@
+<div id="parent" class="card" style="width:fit-content;">
+  <article id="child" class="card-body">
+    <a routerLink="/register" class="float-right btn btn-outline-primary">Register</a>
+    <h4 class="card-title">Login</h4>
+    <form name="form" (ngSubmit)="checkLogin()">
+  <div class="form-group">
+    <label>Email:</label>
+    <br>
+      <input type="email" [(ngModel)]="loginCredentials.username" class="form-control" name="email">
+    </div>
+      <div class="form-group card-link">
+        <a href="#" class="float-right">Forgot Password</a>
+      </div>
+  <div class="form-group">
+    <label>Password: </label>
+    <br>
+      <input type="password" [(ngModel)]="loginCredentials.password" class="form-control" name="password">
+  </div>
+      <div class="form-group">
+      <a *ngIf="showError" class="card-subtitle" style="color:red">Username or password is incorrect</a>
+      </div>
+  <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </article>
+</div>

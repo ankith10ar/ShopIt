@@ -1,0 +1,51 @@
+<div id="parent" class="card row justify-content-md-center" style="width:fit-content;">
+  <article id="child" class="card-body">
+    <a routerLink="/login" class="float-right btn btn-outline-primary">Login</a>
+    <h4 class="card-title">Register</h4>
+    <form name="form" (ngSubmit)="registerUser()">
+      <div class="form-group">
+        <label>Email:</label>
+        <br>
+          <input type="email" (keyup)="emailCheck()" [(ngModel)]="userinfo.username" class="form-control" name="email">
+        <a *ngIf="emailUsed" style="color:red;font-size:13px">Email already registered</a>
+        <a *ngIf="emailError" style="color:red;font-size:13px">Email invalid</a>
+      </div>
+      <div class="form-group">
+        <label>Password: </label>
+        <a *ngIf="pwdStrength==0" class="float-right" style="color:red;font-size:13px">Weak</a>
+        <a *ngIf="pwdStrength==1" class="float-right" style="color:yellowgreen;font-size:13px">Strong</a>
+        <a *ngIf="pwdStrength==2" class="float-right" style="color:forestgreen;font-size:13px">Very Strong</a>
+        <br>
+          <input type="password" (keyup)="passwordValidation()" minlength="8" [(ngModel)]="userinfo.password" class="form-control" name="password">
+        <a *ngIf="passwordNotEntered" style="color:red;font-size:13px">Please enter valid password</a>
+      </div>
+      <div class="form-group">
+        <label>Confirm Password: </label>
+        <br>
+          <input type="password" minlength="8" [(ngModel)]="confirmPassword" (keyup)="passwordCheck()" class="form-control" name="password">
+        <a *ngIf="passwordError" style="color:red;font-size:13px">Password not matched</a>
+       </div>
+      <div class="form-group">
+        <label>First Name: </label>
+        <br>
+          <input type="text" [(ngModel)]="userinfo.firstname" class="form-control" name="password">
+        <a *ngIf="firstNameNotEntered" style="color:red;font-size:13px">Please enter valid first name</a>
+        </div>
+      <div class="form-group">
+        <label>Last Name: </label>
+        <br>
+          <input type="text" [(ngModel)]="userinfo.lastname" class="form-control" name="password">
+        </div>
+      <div class="form-group">
+        <label>Phone No: </label>
+        <br>
+          <input  (keyup)="phoneCheck()" [(ngModel)]="userinfo.phone" class="form-control" maxlength="10" minlength="10"
+                 name="password" pattern="[6-9]{1}[0-9]{9}" required type="text">
+        <a *ngIf="phoneError" style="color:red;font-size:13px">Phone number already used</a>
+        <a *ngIf="invalidPhone" style="color:red;font-size:13px">Phone number invalid</a>
+        <a *ngIf="phoneNotEntered" style="color:red;font-size:13px">Please enter valid phone number</a>
+        </div>
+      <button type="submit" id="submit" class="btn btn-success">Submit</button>
+    </form>
+  </article>
+</div>

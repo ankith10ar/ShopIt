@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if (localStorage.getItem("userData")!=null)
+      this.router.navigate(['home']);
   }
 
   finishLogin() {

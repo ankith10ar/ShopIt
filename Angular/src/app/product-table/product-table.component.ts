@@ -16,6 +16,7 @@ export class ProductTableComponent implements OnInit {
   listProd: Product[] = [];
   constructor(private http: HttpClient,private router:Router) { }
   size: number;
+  result: Result = new Result();
   user: UserInfo = new class implements UserInfo {
     firstname: string;
     lastname: string;
@@ -59,12 +60,18 @@ export class ProductTableComponent implements OnInit {
     Object.assign(this.user,userData);
 
     let url = "http://localhost:8080/buyProd/"+id+"/"+this.user.userid;
-    this.http.get<boolean>(url).subscribe(
+    this.http.get<Result>(url).subscribe(
       res => {
         //location.reload();
         this.ngOnInit();
-        if (res==true) {
+        this.result = res;
+        if ("true" === this.result.result) {
           NavbarComponent.success = "Added the product";
+          NavbarComponent.checkAllMethods();
+        }
+        else if ("Out Of Stock" === this.result.result)
+        {
+          NavbarComponent.info = "Out of Stock";
           NavbarComponent.checkAllMethods();
         }
         else
@@ -91,4 +98,8 @@ export class ProductTableComponent implements OnInit {
     );
   }
 
+}
+
+export class Result{
+  result:string;
 }

@@ -22,12 +22,14 @@ public class CartService {
             repo.save(cart);
     }
 
-    public void addProd(Product product, Long userid)
+    public String addProd(Product product, Long userid)
     {
         Cart cart;
         if (repo.findById(userid +"-"+ product.getProductid()).isPresent())
         {
             cart = get(userid +"-"+ product.getProductid());
+            if (cart.getQuantity()==5)
+                return "{\"result\":\"Out Of Stock\"}";
             long val = cart.getQuantity()+1;
             cart.setCost((cart.getCost()/cart.getQuantity())*val);
             cart.setQuantity(val);
@@ -44,6 +46,7 @@ public class CartService {
             cart.setQuantity(1);
         }
         save(cart);
+        return "{\"result\":\"true\"}";
     }
 
     public Cart get(String id){

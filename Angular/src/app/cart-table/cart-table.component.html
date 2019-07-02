@@ -1,4 +1,4 @@
-<div class="container" xmlns:th="http://www.w3.org/1999/xhtml">
+<!--<div class="container">
   <div class="row justify-content-md-center">
     <div class="col-md-8">
       <form name="form" #f="ngForm" novalidate (ngSubmit)="sendAlert()">
@@ -24,21 +24,21 @@
           <ng-container *ngFor="let cart of listCart; let index=index;">
           <tr>
             <td name="name" [(ngModel)]="cart.name">{{cart.name}}</td>
-            <td name="desp" [(ngModel)]="cart.desp">{{cart.desp}}</td>
+            <td name="desp" [(ngModel)]="cart.description">{{cart.description}}</td>
             <td >
               <label>
                 <input name="name+{{index}}" (change)="change_event()" [(ngModel)]="listCart[index].quantity" max="5"
                        min="1" name="quantity" type="number" value="{{listCart[index].quantity}}">
               </label>
-              <!--<input type="hidden" th:field="*{cartList[__${stat.index}__].cost}" />-->
-             <!-- <input type="hidden" th:field="*{cartList[__${stat.index}__].costofeach}" />
-              <input type="hidden" th:field="*{cartList[__${stat.index}__].desp}" />
+              &lt;!&ndash;<input type="hidden" th:field="*{cartList[__${stat.index}__].cost}" />&ndash;&gt;
+             &lt;!&ndash; <input type="hidden" th:field="*{cartList[__${stat.index}__].costofeach}" />
+              <input type="hidden" th:field="*{cartList[__${stat.index}__].description}" />
               <input type="hidden" th:field="*{cartList[__${stat.index}__].cartid}" />
-              <input type="hidden" th:field="*{cartList[__${stat.index}__].name}" />-->
+              <input type="hidden" th:field="*{cartList[__${stat.index}__].name}" />&ndash;&gt;
             </td>
             <td name="costofeach" [(ngModel)]="cart.costofeach">{{cart.costofeach}}</td>
             <td name="cost" [(ngModel)]="cart.cost">{{cart.cost}}</td>
-            <td><button (click)="deleteItem(cart.cartid)">Remove</button></td>
+            <td><button type="button" (click)="deleteItem(cart.cartid)">Remove</button></td>
           </tr>
           </ng-container>
           </tbody>
@@ -49,6 +49,47 @@
           <button *ngIf="changed" id="save" type="submit" class="btn btn-success ">
             Save Cart
           </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>-->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <form name="form" #f="ngForm" novalidate (ngSubmit)="sendAlert()">
+        <br>
+        <br>
+        <a *ngIf="listCart.length>0" routerLink="/buy" type="button" class="btn btn-success">
+          Buy Now
+        </a>
+        &nbsp;
+        <button *ngIf="changed" id="save" type="submit" class="btn btn-success">
+          Save Cart
+        </button>
+        <br>
+        <br>
+        <div class="card-deck">
+          <ng-container *ngFor="let cart of listCart; let index=index;">
+            <div class="card" style="min-width: 239px;max-width: 250px;margin-bottom: 16px">
+              <img class="card-img-top" src="../../assets/images/{{cart.cartid.split('-')[1]}}.jpg" alt="Card image" style="width: auto;height: 239px;object-fit: contain">
+              <div class="card-body">
+                <h5 name="name" [(ngModel)]="cart.name">{{cart.name}}</h5>
+                <p name="desp" [(ngModel)]="cart.description">{{cart.description}}</p>
+                  <label>
+                    <input name="name+{{index}}" (change)="change_event()" [(ngModel)]="listCart[index].quantity" max="5"
+                           min="1" name="quantity" type="number" value="{{listCart[index].quantity}}">
+                  </label>
+                <h5 name="costofeach" [(ngModel)]="cart.costofeach">Rs. {{cart.costofeach}}/perItem</h5>
+              </div>
+              <div class="card-footer ">
+                <span name="cost" style="font-size: 16px" [(ngModel)]="cart.cost"><strong>Rs. {{cart.cost}}</strong></span>
+                <button type="button" class="btn-outline-danger float-right" (click)="deleteItem(cart.cartid)">Remove</button>
+              </div>
+            </div>
+          </ng-container>
         </div>
       </form>
     </div>

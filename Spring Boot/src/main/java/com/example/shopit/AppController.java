@@ -80,16 +80,16 @@ public class AppController {
     }
 
     @RequestMapping(value = "/buyProd/{id}/{id2}")
-    public boolean viewBuyPage(Model model, @PathVariable(name = "id") Long productid,@PathVariable(value = "id2") String userid){
+    public String viewBuyPage(Model model, @PathVariable(name = "id") Long productid,@PathVariable(value = "id2") String userid){
         Product product = productService.get(productid);
         if (product==null)
-            return false;
-        cartService.addProd(product,Long.parseLong(userid));
+            return "{\"result\":\"false\"}";
+        return cartService.addProd(product,Long.parseLong(userid));
         /*List<Product> listProduct = productService.listAll();
         List<Cart> listCart = cartService.listAll();
         model.addAttribute("listProduct",listProduct);
         model.addAttribute("cartCount",listCart.size());*/
-        return true;
+        //return "true";
     }
 
     /*@RequestMapping(value = "/buy")
@@ -109,6 +109,12 @@ public class AppController {
            return viewHomePage(model);*/
         float total =cartService.getTotal(Long.parseLong(userid));
         cartService.clearCart();
+        return total;
+    }
+
+    @RequestMapping(value = "/getTotal/{id}")
+    public float viewTotal(@PathVariable(value = "id") String userid, Model model){
+        float total =cartService.getTotal(Long.parseLong(userid));
         return total;
     }
 

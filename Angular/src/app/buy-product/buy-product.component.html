@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
   <div class="row justify-content-md-center">
     <div class="col-md-8">
       <br>
@@ -15,7 +15,7 @@
         <tbody>
         <tr *ngFor="let item of listCart">
           <td>{{item.name}}</td>
-          <td>{{item.desp}}</td>
+          <td>{{item.description}}</td>
           <td>{{item.quantity}}</td>
           <td>{{item.cost}}</td>
         </tr>
@@ -28,5 +28,41 @@
       <a routerLink="/payment" type="button" class="btn btn-success" >Pay Now</a>
     </div>
   </div>
-
+</div>-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-7">
+      <ng-container *ngFor="let item of listCart">
+        <div class="card mb-3">
+          <div class="row no-gutters">
+            <div class="col-lg-3">
+              <img class="card-img-top" src="../../assets/images/{{item.cartid.split('-')[1]}}.jpg" alt="Card image" style="width: auto;height: 239px;object-fit: contain">
+            </div>
+            <div class="col-lg-6">
+              <div class="card-body">
+                <h5>{{item.name}}</h5>
+                <p class="card-text">{{item.description}}</p>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="card-body">
+                <span style="font-size: 20px"><strong>Rs. {{item.cost}}</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="col-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <label>Total Cost: </label>
+          <h5 class="float-right">Rs. {{total}}</h5>
+          <br>
+          <a routerLink="/payment" type="button" class="btn btn-success float-right" >Pay Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -16,7 +16,7 @@ import java.util.Optional;
 @SpringBootTest
 public class ShopitApplicationTests {
 
-    /*public CartRepository repository;
+    public CartRepository repository;
 
     public CartService serviceUnderTest;
 
@@ -31,7 +31,7 @@ public class ShopitApplicationTests {
     public void shouldAddItemToCart() {
         Product product = new Product();
 
-        serviceUnderTest.addProd(product, userid);
+        serviceUnderTest.addProd(product,1L);
 
         Mockito.verify(repository).save(Mockito.any());
     }
@@ -39,40 +39,40 @@ public class ShopitApplicationTests {
     @Test
     public void shouldFindCartById() {
         Cart cart = new Cart();
-        cart.setProductid(1L);
-        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(cart));
+        cart.setCartid("1-1");
+        Mockito.when(repository.findById("1-1")).thenReturn(Optional.of(cart));
 
-        Cart result = serviceUnderTest.get(1L);
+        Cart result = serviceUnderTest.get("1-1");
 
-        Assert.assertEquals(result.getProductid(), cart.getProductid());
+        Assert.assertEquals(result.getCartid(), cart.getCartid());
     }
 
     @Test
     public void shouldDeleteCartById() {
         Cart cart = new Cart();
-        cart.setProductid(1L);
-        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(cart));
+        cart.setCartid("1-1");
+        Mockito.when(repository.findById("1-1")).thenReturn(Optional.of(cart));
 
-        serviceUnderTest.delete(1L);
+        serviceUnderTest.delete("1-1");
 
-        Mockito.verify(repository, Mockito.times(1)).deleteById(cart.getProductid());
+        Mockito.verify(repository, Mockito.times(1)).deleteById(cart.getCartid());
     }
 
     @Test
     public void shouldUpdateCart()
     {
         Cart cart = new Cart();
-        cart.setProductid(1L);
+        cart.setCartid("1-1");
         cart.setQuantity(1L);
         cart.setCostofeach(1);
         cart.setCost(1);
-        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(cart));
+        Mockito.when(repository.findById("1-1")).thenReturn(Optional.of(cart));
 
         CartProd cartProd = new CartProd();
         cartProd.setCartList(new ArrayList<Cart>(Collections.singletonList(cart)));
         serviceUnderTest.updateCart(cartProd);
 
-        Assert.assertEquals((int)cart.getCost(),(int)repository.findById(1L).get().getCost());
-    }*/
+        Assert.assertEquals((int)cart.getCost(),(int)repository.findById("1-1").get().getCost());
+    }
 
 }

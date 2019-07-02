@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
   passwordNotEntered: boolean;
   phoneNotEntered: boolean;
   pwdStrength: number;
+  phoneVerify: PhoneVerify;
 
   constructor(private http:HttpClient, private router: Router) {
     this.userinfo = AppComponent.userinfo;
@@ -40,6 +41,9 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem("userData")!=null)
+      this.router.navigate(['home']);
+
   }
 
 
@@ -163,15 +167,50 @@ export class RegisterComponent implements OnInit {
         res => {
           console.log(res);
           this.phoneError = res;
+          if(!res)
+          {
+            //http://apilayer.net/api/validate?access_key=607ec08df9a49102801594d7fbb5bfe9&number=917975293566
+            this.phoneDetails(this.userinfo.phone);
+          }
         },
         err => {
           alert("server error")
         }
       );
     }
-    else
+    else if(this.userinfo.phone.length==0) {
       this.invalidPhone = false;
+      this.phoneVerify = null;
+    }
   }
+
+  phoneDetails(phone: string)
+  {
+    let url = "http://apilayer.net/api/validate?access_key=607ec08df9a49102801594d7fbb5bfe9&number=91"+phone;
+    this.http.get<PhoneVerify>(url).subscribe(
+      res => {
+          this.phoneVerify = res;
+          if (!this.phoneVerify.valid)
+            this.invalidPhone=true;
+      },
+      err => {
+        this.invalidPhone=true;
+      }
+    )
+  }
+}
+
+export class PhoneVerify{
+    valid: boolean;
+    number: string;
+    local_format: string;
+    international_format: string;
+    country_prefix: string;
+    country_code: string;
+    country_name: string;
+    location: string;
+    carrier: string;
+    line_type: string;
 }
 
 

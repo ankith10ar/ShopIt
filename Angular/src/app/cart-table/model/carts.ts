@@ -4,7 +4,7 @@ export class Carts implements Cart{
   private _cartid: string;
   private _cost: any;
   private _costofeach: any;
-  private _desp: string;
+  private _description: string;
   private _name: string;
   private _quantity: number;
 
@@ -33,12 +33,12 @@ export class Carts implements Cart{
     this._costofeach = value;
   }
 
-  get desp(): string {
-    return this._desp;
+  get description(): string {
+    return this._description;
   }
 
-  set desp(value: string) {
-    this._desp = value;
+  set description(value: string) {
+    this._description = value;
   }
 
   get name(): string {

@@ -1,3 +1,4 @@
+<!--
 <div class="container">
   <div class="row justify-content-md-center">
     <div class="col-md-8">
@@ -32,5 +33,42 @@
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+    <br>
+    <h1>Welcome, please choose your products.</h1>
+    <br>
+    <br>
+      <a routerLink="/cart"  type="button" class="btn btn-primary">
+        Cart(<span>{{size}}</span>)
+      </a>
+    &nbsp;
+      <a *ngIf="size>0" routerLink="/buy" type="button" class="btn btn-success">
+        Buy Now
+      </a>
+    <br>
+    <br>
+    <div class="card-deck">
+      <ng-container *ngFor="let product of listProd">
+        <div class="card" style="min-width: 239px;max-width: 250px;margin-bottom: 16px">
+          <img class="card-img-top" src="../../assets/images/{{product.productid}}.jpg" alt="Card image" style="width: auto;height: 239px;object-fit: contain">
+          <div class="card-body">
+            <h4 class="card-title">{{product.productname}}</h4>
+            <p class="card-text">{{product.productdescription}}</p>
+          </div>
+          <div class="card-footer ">
+            <span style="font-size: 18px"><strong>Rs.{{product.productvalue}}</strong></span>
+            <button (click)="buyProduct(product.productid)" type="button" class="btn btn-success float-right">Buy</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+    <div class="col-lg-2"></div>
   </div>
 </div>

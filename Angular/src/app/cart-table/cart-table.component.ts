@@ -105,7 +105,7 @@ export class CartTableComponent implements OnInit {
 export interface Cart{
   cartid: string,
   name: string,
-  desp: string,
+  description: string,
   cost: any,
   quantity: number,
   costofeach: any

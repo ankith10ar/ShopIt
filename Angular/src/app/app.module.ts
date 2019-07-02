@@ -14,6 +14,7 @@ import { BuyProductComponent } from './buy-product/buy-product.component';
 import { PaymentComponent } from './payment/payment.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import {AngularRaveComponent, AngularRaveModule} from "angular-rave";
 
 const appRoutes :Routes = [
   {

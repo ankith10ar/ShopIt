@@ -1,3 +1,4 @@
+<!--
 <div class="container">
   <div class="row justify-content-md-center">
     <div class="col-md-8">
@@ -7,4 +8,38 @@
       <br>
     </div>
   </div>
+</div>
+-->
+<div class="col-md-4">
+  <h2>PayU Payment Form</h2>
+  <form ngNoForm action="https://test.payu.in/_payment" name="payuform" method="POST" target="payment_popup"  onsubmit="window.open('about:blank','payment_popup','width=900,height=500');">
+    <div hidden class="form-group">
+      <label for="productInfo">Product Name:</label>
+      <input type="text" class="form-control" id="productInfo" name="productinfo" [(ngModel)]="payuform.productinfo">
+    </div>
+    <div class="form-group">
+      <label for="firstname">Name:</label>
+      <input disabled type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="payuform.firstname">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input disabled type="email" class="form-control" id="email" name="email" [(ngModel)]="payuform.email">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input disabled type="number" class="form-control" id="phone" name="phone" [(ngModel)]="payuform.phone">
+    </div>
+    <div class="form-group">
+      <label for="amount">Amount:</label>
+      <input disabled type="number" class="form-control" id="amount" name="amount" [(ngModel)]="payuform.amount">
+    </div>
+    <textarea name="surl" id="surl" ng-model="surl" rows="2" cols="2" hidden [(ngModel)]="payuform.surl"></textarea>
+    <textarea name="furl" id="furl" ng-model="furl" rows="2" cols="2" hidden [(ngModel)]="payuform.furl"></textarea>
+    <textarea name="key" id="key" ng-model="key" rows="2" cols="2" hidden [(ngModel)]="payuform.key"></textarea>
+    <textarea name="hash" id="hash" ng-model="hash" rows="2" cols="2" hidden [(ngModel)]="payuform.hash"></textarea>
+    <textarea name="txnid" id="txnid" ng-model="txnid" rows="2" cols="2" hidden [(ngModel)]="payuform.txnid"></textarea>
+    <textarea name="service_provider" id="service_provider" rows="2" cols="2" hidden></textarea>
+    <button *ngIf="disablePaymentButton" type="button"  class="btn btn-default" (click)="confirmPayment()">Confirm</button>
+    <button *ngIf="!disablePaymentButton" type="submit" class="btn btn-danger">Submit</button>
+  </form>
 </div>

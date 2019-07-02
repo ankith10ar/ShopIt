@@ -22,7 +22,8 @@ export class BuyProductComponent implements OnInit {
     userid: number;
     username: string;
   };
-
+  total: number;
+  
   ngOnInit() {
     if (localStorage.getItem("userData")==null) {
       this.router.navigate(['login']);
@@ -31,6 +32,7 @@ export class BuyProductComponent implements OnInit {
     }
     else {
       this.getAllCart();
+      this.getTotal();
     }
   }
 
@@ -46,6 +48,24 @@ export class BuyProductComponent implements OnInit {
         if(this.listCart.length==0) {
           this.router.navigate(['home']);
         }
+      },
+      err => {
+        alert("An error has occured")
+      }
+    );
+  }
+
+  public getTotal()
+  {
+    let userData = JSON.parse(localStorage.getItem("userData"));
+    Object.assign(this.user,userData);
+
+    let url = "http://localhost:8080/getTotal/"+this.user.userid;
+    this.http.get<number>(url).subscribe(
+      res => {
+        this.total = res;
+        if (this.total==0)
+          this.router.navigate(['home']);
       },
       err => {
         alert("An error has occured")

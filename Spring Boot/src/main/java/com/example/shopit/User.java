@@ -1,6 +1,8 @@
 package com.example.shopit;
 
 import org.hibernate.validator.constraints.Length;
+import org.jasypt.util.password.BasicPasswordEncryptor;
+import org.jasypt.util.text.BasicTextEncryptor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

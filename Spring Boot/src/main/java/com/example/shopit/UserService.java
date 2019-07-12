@@ -1,5 +1,6 @@
 package com.example.shopit;
 
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,11 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository repo;
+    private final PropertyServiceForJasyptStarter jasyptStarter;
 
-    public UserService(UserRepository repo) {
+    public UserService(UserRepository repo, PropertyServiceForJasyptStarter jasyptStarter) {
         this.repo = repo;
+        this.jasyptStarter = jasyptStarter;
     }
 
     List<User> listAll(){
@@ -20,7 +23,11 @@ public class UserService {
     }
 
     public void save(User user) {
-        repo.save(user);
+
+        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+        textEncryptor.setPassword(jasyptStarter.getProperty());
+        user.setPassword(textEncryptor.encrypt(user.getPassword()));
+            repo.save(user);
     }
 
     public User get(long id){
@@ -35,7 +42,10 @@ public class UserService {
 
     public boolean validate(Login login) {
         List<User> list = listAll();
-        return list.stream().anyMatch(user -> (user.getUsername().equals(login.getUsername()) && user.getPassword().equals(login.getPassword())));
+        //System.setProperty("jasypt.encryptor.password", "password");
+        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+        textEncryptor.setPassword(jasyptStarter.getProperty());
+        return list.stream().anyMatch(user -> (user.getUsername().equals(login.getUsername()) && textEncryptor.decrypt(user.getPassword()).equals(login.getPassword())));
     }
 
     public boolean checkUsername(String username) {
@@ -50,8 +60,11 @@ public class UserService {
 
     public User loginAs(Login login) {
         List<User> list = listAll();
+
+        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+        textEncryptor.setPassword(jasyptStarter.getProperty());
         return list.stream().filter(user -> {
-            return user.getUsername().equals(login.getUsername()) || user.getPassword().equals(login.getPassword());
+            return user.getUsername().equals(login.getUsername()) && textEncryptor.decrypt(user.getPassword()).equals(login.getPassword());
         }).findFirst().get();
     }
 }

@@ -6,10 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.env.Environment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -78,22 +75,4 @@ public class ShopitApplicationTests {
         Assert.assertEquals((int)cart.getCost(),(int)repository.findById("1-1").get().getCost());
     }
 
-    @Autowired
-    ApplicationContext appCtx;
-
-    @Test
-    public void whenDecryptedPasswordNeeded_GetFromService()
-    {
-        System.setProperty("jasypt.encryptor.password", "password");
-        PropertyServiceForJasyptStarter service =
-                appCtx.getBean(PropertyServiceForJasyptStarter.class);
-
-        Assert.assertEquals("Password@1", service.getProperty());
-
-        Environment environment = appCtx.getBean(Environment.class);
-
-        Assert.assertEquals(
-                "Password@1",
-                service.getPasswordUsingEnvironment(environment));
-    }
 }

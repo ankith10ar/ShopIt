@@ -19,12 +19,11 @@ public class UserTests {
 
     public UserRepository repository;
     public UserService serviceUnderTest;
-    public PropertyServiceForJasyptStarter jasyptStarter;
 
     @Before
     public void setup() {
         repository = Mockito.mock(UserRepository.class);
-        serviceUnderTest = new UserService(repository,jasyptStarter);
+        serviceUnderTest = new UserService(repository);
     }
 
     @Test

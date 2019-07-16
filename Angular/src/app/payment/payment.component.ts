@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {AppComponent, UserInfo} from "../app.component";
 import {NavbarComponent} from "../navbar/navbar.component";
+import {ip} from "../global";
 
 @Component({
   selector: 'app-payment',
@@ -43,7 +44,7 @@ export class PaymentComponent implements OnInit {
     let userData = JSON.parse(localStorage.getItem("userData"));
     Object.assign(this.user,userData);
 
-    let url = "http://localhost:8080/payment/"+this.user.userid;
+    let url = ip+"/payment/"+this.user.userid;
     this.http.get<number>(url).subscribe(
       res => {
         this.total = res;
@@ -72,7 +73,7 @@ export class PaymentComponent implements OnInit {
       productInfo: this.payuform.productinfo,
       amount: this.payuform.amount
     };
-    return this.http.post<any>('http://localhost:8080/payment/payment-details', paymentPayload).subscribe(
+    return this.http.post<any>(ip+'/payment/payment-details', paymentPayload).subscribe(
       data => {
         console.log(data);
         this.payuform.txnid = data.txnId;

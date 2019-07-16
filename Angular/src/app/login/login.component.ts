@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {Alert} from "selenium-webdriver";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {AppComponent, UserInfo} from "../app.component";
+import {ip} from "../global";
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   finishLogin() {
-    let url = "http://localhost:8080/loginas";
+    let url = ip+"/loginas";
     this.http.post<UserInfo>(url,this.loginCredentials).subscribe(
       res => {
         localStorage.setItem("userData",JSON.stringify(res));
@@ -56,7 +57,7 @@ export class LoginComponent implements OnInit {
       this.showError = true;
       return;
     }
-    let url = "http://localhost:8080/checkLogin";
+    let url = ip+"/checkLogin";
     this.http.post<boolean>(url,this.loginCredentials).subscribe(
       res => {
         if (res==true)

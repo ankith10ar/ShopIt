@@ -7,11 +7,12 @@ import {Carts} from "./model/carts";
 import {Router} from "@angular/router";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {AppComponent, UserInfo} from "../app.component";
+import {ip} from "../global";
 
 @Component({
   selector: 'app-cart-table',
   templateUrl: './cart-table.component.html',
-  styleUrls: ['./cart-table.component.css']
+  styleUrls: ['./cart-table.component.css'],
 })
 export class CartTableComponent implements OnInit {
 
@@ -51,7 +52,7 @@ export class CartTableComponent implements OnInit {
     let userData = JSON.parse(localStorage.getItem("userData"));
     Object.assign(this.user,userData);
 
-    let url = "http://localhost:8080/cart/"+this.user.userid;
+    let url = ip+"/cart/"+this.user.userid;
     this.http.get<Carts[]>(url).subscribe(
       res => {
         this.listCart = res;
@@ -69,7 +70,7 @@ export class CartTableComponent implements OnInit {
     let userData = JSON.parse(localStorage.getItem("userData"));
     Object.assign(this.user,userData);
 
-    let url = "http://localhost:8080/cartDel/"+id;
+    let url = ip+"/cartDel/"+id;
     this.http.get(url).subscribe(
       res => {
             this.ngOnInit();
@@ -86,7 +87,7 @@ export class CartTableComponent implements OnInit {
   {
     //this.cardProd.listCart = this.listCart;
 
-    let url = "http://localhost:8080/cart";
+    let url = ip+"/cart";
     this.http.post(url,this.listCart).subscribe(
     res => {
       this.ngOnInit();

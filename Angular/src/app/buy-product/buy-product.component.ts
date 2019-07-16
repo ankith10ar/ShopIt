@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {AppComponent, UserInfo} from "../app.component";
 import {NavbarComponent} from "../navbar/navbar.component";
+import {ip} from "../global";
 
 @Component({
   selector: 'app-buy-product',
@@ -41,7 +42,7 @@ export class BuyProductComponent implements OnInit {
     let userData = JSON.parse(localStorage.getItem("userData"));
     Object.assign(this.user,userData);
 
-    let url = "http://localhost:8080/cart/"+this.user.userid;
+    let url = ip+"/cart/"+this.user.userid;
     this.http.get<Carts[]>(url).subscribe(
       res => {
         this.listCart = res;
@@ -60,7 +61,7 @@ export class BuyProductComponent implements OnInit {
     let userData = JSON.parse(localStorage.getItem("userData"));
     Object.assign(this.user,userData);
 
-    let url = "http://localhost:8080/getTotal/"+this.user.userid;
+    let url = ip+"/getTotal/"+this.user.userid;
     this.http.get<number>(url).subscribe(
       res => {
         this.total = res;

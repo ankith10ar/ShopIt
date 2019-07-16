@@ -5,6 +5,7 @@ import {Carts} from "../cart-table/model/carts";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {AppComponent, UserInfo} from "../app.component";
 import {Router} from "@angular/router";
+import {ip} from "../global";
 
 @Component({
   selector: 'app-product-table',
@@ -43,7 +44,7 @@ export class ProductTableComponent implements OnInit {
     let userData = JSON.parse(localStorage.getItem("userData"));
     Object.assign(this.user,userData);
 
-    let url = "http://localhost:8080/cartSize/"+this.user.userid;
+    let url = ip+"/cartSize/"+this.user.userid;
     this.http.get<number>(url).subscribe(
       res => {
         this.size = res;
@@ -59,7 +60,7 @@ export class ProductTableComponent implements OnInit {
     let userData = JSON.parse(localStorage.getItem("userData"));
     Object.assign(this.user,userData);
 
-    let url = "http://localhost:8080/buyProd/"+id+"/"+this.user.userid;
+    let url = ip+"/buyProd/"+id+"/"+this.user.userid;
     this.http.get<Result>(url).subscribe(
       res => {
         //location.reload();
@@ -87,7 +88,7 @@ export class ProductTableComponent implements OnInit {
   }
 
   public getAllProducts(){
-    let url = "http://localhost:8080/home";
+    let url = ip+"/home";
     this.http.get<Product[]>(url).subscribe(
       res => {
           this.listProd = res;

@@ -80,7 +80,7 @@
                 <p name="desp" [(ngModel)]="cart.description">{{cart.description}}</p>
                   <label>
                     <input name="name+{{index}}" (change)="change_event()" [(ngModel)]="listCart[index].quantity" max="5"
-                           min="1" name="quantity" type="number" value="{{listCart[index].quantity}}">
+                           min="1" type="number" value="{{listCart[index].quantity}}">
                   </label>
                 <h5 name="costofeach" [(ngModel)]="cart.costofeach">Rs. {{cart.costofeach}}/perItem</h5>
               </div>

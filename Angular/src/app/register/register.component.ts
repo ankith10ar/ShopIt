@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import set = Reflect.set;
 import {NavbarComponent} from "../navbar/navbar.component";
 import {Router} from "@angular/router";
+import {ip} from "../global";
 
 @Component({
   selector: 'app-register',
@@ -60,7 +61,7 @@ export class RegisterComponent implements OnInit {
       this.emailError = false;
       return;
     }
-    let url = "http://localhost:8080/emailcheck/"+this.userinfo.username;
+    let url = ip+"/emailcheck/"+this.userinfo.username;
     this.http.get<boolean>(url).subscribe(
       res => {
         console.log(res);
@@ -139,7 +140,7 @@ export class RegisterComponent implements OnInit {
     if (this.pwdStrength<=0)
       return;
 
-    let url = "http://localhost:8080/register";
+    let url = ip+"/register";
     this.http.post(url,this.userinfo).subscribe(
       res => {
         AppComponent.userinfo = this.userinfo;
@@ -162,7 +163,7 @@ export class RegisterComponent implements OnInit {
         return;
       }
       this.invalidPhone = false;
-      let url = "http://localhost:8080/phonecheck/" + this.userinfo.phone;
+      let url = ip+"/phonecheck/" + this.userinfo.phone;
       this.http.get<boolean>(url).subscribe(
         res => {
           console.log(res);

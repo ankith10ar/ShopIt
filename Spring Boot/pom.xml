@@ -69,7 +69,7 @@
                             <outputDirectory>${project.build.directory}/classes/static/</outputDirectory >
                             <resources>
                                 <resource>
-                                    <directory>../shopit-ng/dist/shopit-ng</directory>
+                                    <directory>../Angular/dist/shopit-ng</directory>
                                 </resource>
                             </resources>
                         </configuration>

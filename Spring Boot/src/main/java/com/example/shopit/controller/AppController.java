@@ -1,5 +1,13 @@
-package com.example.shopit;
+package com.example.shopit.controller;
 
+import com.example.shopit.model.CartProd;
+import com.example.shopit.service.CartService;
+import com.example.shopit.service.ProductService;
+import com.example.shopit.service.UserService;
+import com.example.shopit.model.Cart;
+import com.example.shopit.model.Login;
+import com.example.shopit.model.Product;
+import com.example.shopit.model.User;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -119,7 +127,7 @@ public class AppController {
     }
 
     @PostMapping(value = "/checkLogin")
-    public boolean checkLogin(@RequestBody Login login,Model model)
+    public boolean checkLogin(@RequestBody Login login, Model model)
     {
         return userService.validate(login);
     }
@@ -137,7 +145,7 @@ public class AppController {
     }
 
     @PostMapping(value = "/register")
-    public void registerUser(@RequestBody User user,Model model)
+    public void registerUser(@RequestBody User user, Model model)
     {
         userService.save(user);
     }

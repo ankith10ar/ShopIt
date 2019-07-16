@@ -1,4 +1,4 @@
-package com.example.shopit;
+package com.example.shopit.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

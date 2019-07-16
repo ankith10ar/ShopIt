@@ -1,4 +1,4 @@
-package com.example.shopit;
+package com.example.shopit.payment;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

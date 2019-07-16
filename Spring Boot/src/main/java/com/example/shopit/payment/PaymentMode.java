@@ -1,4 +1,4 @@
-package com.example.shopit;
+package com.example.shopit.payment;
 
 public enum PaymentMode {
 

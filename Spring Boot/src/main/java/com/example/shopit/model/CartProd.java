@@ -1,6 +1,7 @@
-package com.example.shopit;
+package com.example.shopit.model;
 
-import javax.persistence.Entity;
+import com.example.shopit.model.Cart;
+
 import java.util.List;
 
 public class CartProd {

@@ -1,7 +1,10 @@
-package com.example.shopit;
+package com.example.shopit.controller;
 
+import com.example.shopit.payment.PaymentCallback;
+import com.example.shopit.payment.PaymentDetail;
+import com.example.shopit.payment.PaymentMode;
+import com.example.shopit.payment.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

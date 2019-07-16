@@ -1,5 +1,6 @@
-package com.example.shopit;
+package com.example.shopit.payment;
 
+import com.example.shopit.dao.PaymentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.shopit;
+package com.example.shopit.model;
 
 public class Login {
 

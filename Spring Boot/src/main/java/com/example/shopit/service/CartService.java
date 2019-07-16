@@ -1,5 +1,9 @@
-package com.example.shopit;
+package com.example.shopit.service;
 
+import com.example.shopit.model.CartProd;
+import com.example.shopit.dao.CartRepository;
+import com.example.shopit.model.Cart;
+import com.example.shopit.model.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,7 +18,7 @@ public class CartService {
         this.repo = repo;
     }
 
-    List<Cart> listAll(){
+    public List<Cart> listAll(){
         return repo.findAll();
     }
 

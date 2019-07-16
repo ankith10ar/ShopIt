@@ -48,6 +48,13 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
+
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>2.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -56,7 +63,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-                 <plugin>
+
+            <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
@@ -69,14 +77,16 @@
                             <outputDirectory>${project.build.directory}/classes/static/</outputDirectory >
                             <resources>
                                 <resource>
-                                    <directory>../Angular/dist/shopit-ng</directory>
+                                    <directory>../shopit-ng/dist/shopit-ng</directory>
                                 </resource>
                             </resources>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>          
+            </plugin>
         </plugins>
     </build>
+
+
 
 </project>
